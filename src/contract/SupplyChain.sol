@@ -1,17 +1,16 @@
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity ^0.4.17;
+pragma experimental ABIEncoderV2;
 
 contract SupplyChain {
     enum EventType { TEMPERATURE, HUMIDITY, LIGHT, SPEED, LOCATION }
-    enum ValueType { STRING, INT, FLOAT }
     
     struct Event {
         uint id;
         uint createdAt;
         address createdBy;
         EventType eventType;
-        ValueType valueType;
         string value;
         string objectId;
     }
@@ -23,9 +22,11 @@ contract SupplyChain {
     
     address public creator;
     mapping (address => bool) public administrators;
-    mapping (uint => Event) public events;
+    mapping (uint => Event) public eventsById;
     mapping (address => Device) public devices;
     uint public eventCounter;
+
+    mapping(string => Event[]) private eventsByObjectId;
 
     modifier onlyAdministrator {
         require(administrators[msg.sender]);
@@ -70,13 +71,12 @@ contract SupplyChain {
 
     function registerEvent(
         EventType eventType,
-        ValueType valueType,
         string value,
         string objectId
     ) public onlyDevice {
         uint id = eventCounter;
         id++;
-        require(events[id].id == 0);
+        require(eventsById[id].id == 0);
         require(devices[msg.sender].events[id].id == 0);
 
         Event memory newEvent = Event({
@@ -84,13 +84,17 @@ contract SupplyChain {
             createdAt: now,
             createdBy: msg.sender,
             eventType: eventType,
-            valueType: valueType,
             value: value,
             objectId: objectId
         });
-        events[id] = newEvent;
+        eventsById[id] = newEvent;
+        eventsByObjectId[objectId].push(newEvent);
         devices[msg.sender].events[id] = newEvent;
         eventCounter++;
+    }
+
+    function getEventsByObjectId(string id) public view returns(Event[]) {
+        return eventsByObjectId[id];
     }
 
     function finalize() public onlyCreator {
