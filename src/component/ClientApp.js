@@ -20,27 +20,31 @@ class App extends React.Component {
     render = () => {
         return (
             <div className='mt-3 p-2 card container events-container'>
-                <h1>Events for object { this.state.query?.objectId }</h1>
-                <table className="table mt-5">
-                    <thead>
-                        <tr>
-                            <th scope="col">Event ID</th>
-                            <th scope="col">Time</th>
-                            <th scope="col">Event type</th>
-                            <th scope="col">Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.objectEvents.map(item => (
-                            <tr key={item.getId()}>
-                                <td>{item.getId()}</td>
-                                <td>{item.getCreatedAt().toLocaleString("lt-LT")}</td>
-                                <td>{item.getEventType()}</td>
-                                <td>{this.resolveValue(item)}</td>
+                <div className='row'>
+                    <div className='col-md-12'>
+                    <h1>Events for object { this.state.query?.objectId }</h1>
+                    <table className="table mt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">Event ID</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Event type</th>
+                                <th scope="col">Value</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {this.state.objectEvents.map(item => (
+                                <tr key={item.getId()}>
+                                    <td>{item.getId()}</td>
+                                    <td>{item.getCreatedAt().toLocaleString("lt-LT")}</td>
+                                    <td>{item.getEventType()}</td>
+                                    <td>{this.resolveValue(item)}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
             </div>
         );
     }
