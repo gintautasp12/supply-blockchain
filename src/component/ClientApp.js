@@ -9,7 +9,7 @@ class App extends React.Component {
     componentDidMount = async () => {
         try {
             const query = this.getQueryParams();
-            const events = await blockchainReader.readEvents(query.objectId);
+            const events = await blockchainReader.readEvents(query?.objectId);
             
             this.setState({ objectEvents: events, query: query });
         } catch (error) {

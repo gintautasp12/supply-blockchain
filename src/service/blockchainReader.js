@@ -3,6 +3,10 @@ import contractProvider from './contractProvider';
 
 class BlockChainReader {
     readEvents = async (id) => {
+        if (!id) {
+            return [];
+        }
+
         const contract = contractProvider.getContract();
         const result = await contract.methods.getEventsByObjectId(id).call();
         
