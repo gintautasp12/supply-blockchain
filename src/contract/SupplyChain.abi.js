@@ -29,6 +29,24 @@ const abi = [
     },
     {
         "constant": false,
+        "inputs": [
+            {
+                "name": "adr",
+                "type": "address"
+            },
+            {
+                "name": "author",
+                "type": "address"
+            }
+        ],
+        "name": "registerDevice",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
         "inputs": [],
         "name": "finalize",
         "outputs": [],
@@ -132,20 +150,6 @@ const abi = [
         ],
         "payable": false,
         "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "name": "adr",
-                "type": "address"
-            }
-        ],
-        "name": "registerDevice",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
