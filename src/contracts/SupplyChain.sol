@@ -4,8 +4,8 @@ pragma solidity ^0.4.17;
 pragma experimental ABIEncoderV2;
 
 contract SupplyChain {
-    enum EventType { TEMPERATURE, HUMIDITY, LIGHT, SPEED, LOCATION }
-    
+    enum EventType { TEMPERATURE, HUMIDITY, PRESSURE, SPEED, LOCATION }
+
     struct Event {
         uint id;
         uint createdAt;
@@ -45,6 +45,7 @@ contract SupplyChain {
 
     constructor() public {
         creator = msg.sender;
+        administrators[msg.sender] = true;
     }
 
     function registerAdministrator(address adr) public onlyCreator {
@@ -53,12 +54,12 @@ contract SupplyChain {
         administrators[adr] = true;
     }
 
-    function registerDevice(address adr) public onlyAdministrator {
-        require(!(devices[adr].deviceAddress > 0));
+    function registerDevice(address adr, address author) public onlyAdministrator {
+        require(devices[adr].deviceAddress == 0);
 
         devices[adr] = Device({
             deviceAddress: adr,
-            createdBy: msg.sender
+            createdBy: author
         });
     }
 
@@ -101,3 +102,4 @@ contract SupplyChain {
         selfdestruct(creator);
     }
 }
+
