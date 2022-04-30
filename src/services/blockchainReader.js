@@ -1,4 +1,4 @@
-import { Event, TEMPERATURE, HUMIDITY, LIGHT, SPEED, LOCATION } from '../valueObject/event';
+import { Event, TEMPERATURE, HUMIDITY, PRESSURE, SPEED, LOCATION } from '../valueObjects/event';
 import contractProvider from './contractProvider';
 
 class BlockChainReader {
@@ -30,7 +30,7 @@ class BlockChainReader {
                 eventType = HUMIDITY;
                 break;
             case '2':
-                eventType = LIGHT;
+                eventType = PRESSURE;
                 break;
             case '3':
                 eventType = SPEED;

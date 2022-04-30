@@ -1,6 +1,6 @@
 const TEMPERATURE = 'temperature'; 
 const HUMIDITY = 'humidity'; 
-const LIGHT = 'light'; 
+const PRESSURE = 'pressure'; 
 const SPEED = 'speed';
 const LOCATION = 'location';
 
@@ -35,6 +35,6 @@ export {
     TEMPERATURE,
     HUMIDITY,
     LOCATION,
-    LIGHT,
+    PRESSURE,
     SPEED
 }

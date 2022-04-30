@@ -4,7 +4,7 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import ClientApp from './component/ClientApp';
+import ClientApp from './components/ClientApp';
 
 const clientAppRoot = ReactDOM.createRoot(document.getElementById('client-app-root'));
 

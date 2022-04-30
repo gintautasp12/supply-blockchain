@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import { INFURA_RINKEBY_ENDPOINT, PRIVATE_KEY, CONTRACT_ADDRESS } from '../config';
-import abi from '../contract/SupplyChain.abi';
+import abi from '../contracts/SupplyChain.abi';
 
 class ContractProvider {
     getContract = () => {
